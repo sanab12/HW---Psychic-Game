@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>Pyschic Game</h1>
+
+    <h3>Guess what letter I'm thinking of</h3>
+
+    <p>Wins: <span id=winsText></span></p>
+
+    <p>Losses: <span id="lossText"></span></p>
+
+    <p>Guesses left: <span id="guessLeftText"></span></p>
+
+    <p>Your guesses so far: <span id="yourGuessText"></span></p>
+
+    <script>
+
+        // generating random letter
+
+        var wins = 0;
+
+        var losses = 0;
+
+        var guessCount = 9;
+
+        var yourGuess = [];
+
+        var computerGuess;
+
+        
+
+        function guessNumber()
+        {
+            //this is a piece of code I found from the internet to generate a random letter from the alphabet
+            computerGuess = String.fromCharCode(Math.floor((Math.random() * 25) + 97));
+        }
+        
+        // guessing the number
+
+        document.onkeyup = function (event) {
+            var userGuess = event.key;
+            guessCount = guessCount - 1;
+
+
+            if (userGuess === computerGuess) {
+                wins = wins + 1;
+                guessNumber();
+                guessCount = 9;
+                yourGuess = []
+            }
+
+            else {
+                yourGuess.push(userGuess);
+            }
+
+            if (guessCount === 0) {
+                losses = losses + 1;
+                guessNumber();
+                guessCount = 9;
+                yourGuess = []
+            }
+
+            //displaying the results
+
+            winsText.textContent = wins;
+            lossText.textContent = losses;
+            guessLeftText.textContent = guessCount;
+            yourGuessText.textContent = yourGuess;
+        }
+
+    </script>
+
+</body>
+
+</html>
